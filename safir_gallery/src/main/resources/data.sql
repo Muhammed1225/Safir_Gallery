@@ -14,3 +14,10 @@ insert into admins
 (name,username)
 values
 ('Muhammed','admin1');
+
+insert into categories
+(name)
+values
+('Category1'),
+('Category2'),
+('Category3');
