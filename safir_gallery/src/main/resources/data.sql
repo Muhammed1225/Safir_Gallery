@@ -21,3 +21,10 @@ values
 ('Category1'),
 ('Category2'),
 ('Category3');
+
+insert into flowers
+(text, images, category_id)
+values
+('flower1', 'p1', '2'),
+('flower2', 'p2', '1'),
+('flower3', 'p3', '3');
