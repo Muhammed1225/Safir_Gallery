@@ -1,12 +1,12 @@
 FROM openjdk:21-jdk-slim
 WORKDIR /app
 
+EXPOSE 8080
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
-RUN chmod +x mvnw && ./mvnw clean package
-
 COPY src ./src
-RUN ./mvnw package -DskipTests
 
-ENTRYPOINT ["java", "-jar", "/app/target/safir.jar"]
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests  # Tek bir satırda yap!
+
+ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "/app/target/safir.jar"]
