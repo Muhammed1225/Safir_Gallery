@@ -69,4 +69,21 @@ public class CategoryService implements CategoryInter {
             throw new MyException("The id wasn't found!");
         }
     }
+
+    @Override
+    public CategoryResponse findById(Integer id) {
+        CategoryResponse response = new CategoryResponse();
+        Optional<CategoryEntity> optional = repository.findById(id);
+        List<CategorySingleResponse> responseList = new ArrayList<>();
+
+        if (optional.isPresent()){
+            CategoryEntity entity = optional.get();
+            CategorySingleResponse singleResponse = new CategorySingleResponse();
+            mapper.map(entity, singleResponse);
+            responseList.add(singleResponse);
+        }
+
+        response.setCategories(responseList);
+        return response;
+    }
 }

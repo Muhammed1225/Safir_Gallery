@@ -13,4 +13,8 @@ public class FlowerSingleResponse {
 
     private List<String> images;
 
+    private String category;
+
+    private Integer categoryId;
+
 }

@@ -20,9 +20,21 @@ public class FlowerController {
     @Autowired
     private FlowerService service;
 
-    @GetMapping("/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public FlowerResponse findByCategory(@PathVariable Integer categoryId) {
         return service.findByCategory(categoryId);
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public FlowerResponse findAll() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public FlowerResponse findById(@PathVariable Integer id) {
+        return service.findById(id);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

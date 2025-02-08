@@ -5,8 +5,10 @@ import app.cybergalaxy.safir_gallery.dto.response.FlowerSingleResponse;
 import app.cybergalaxy.safir_gallery.exception.MyException;
 import app.cybergalaxy.safir_gallery.model.CategoryEntity;
 import app.cybergalaxy.safir_gallery.model.FlowerEntity;
+import app.cybergalaxy.safir_gallery.model.FlowerViewEntity;
 import app.cybergalaxy.safir_gallery.repository.CategoryRepository;
 import app.cybergalaxy.safir_gallery.repository.FlowerRepository;
+import app.cybergalaxy.safir_gallery.repository.FlowerViewRepository;
 import app.cybergalaxy.safir_gallery.service.inter.FlowerInter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class FlowerService implements FlowerInter {
 
     @Autowired
     private FlowerRepository repository;
+
+    @Autowired
+    private FlowerViewRepository flowerViewRepository;
 
     @Autowired
     private FileUploadService fileUploadService;
@@ -56,8 +61,8 @@ public class FlowerService implements FlowerInter {
 
     @Override
     public FlowerResponse findByCategory(Integer categoryId) {
-        FlowerResponse response = new FlowerResponse();
         List<FlowerEntity> entities = repository.findByCategory(categoryId);
+        FlowerResponse response = new FlowerResponse();
         List<FlowerSingleResponse> responseList = new ArrayList<>();
 
         for (FlowerEntity e : entities) {
@@ -106,5 +111,38 @@ public class FlowerService implements FlowerInter {
         } else {
             throw new MyException("The flower was deleted");
         }
+    }
+
+    @Override
+    public FlowerResponse findAll() {
+        List<FlowerViewEntity> entities = flowerViewRepository.findAllFlowers();
+        return converter(entities);
+    }
+
+    @Override
+    public FlowerResponse findById(Integer id) {
+        Optional<FlowerViewEntity> optional = flowerViewRepository.findFlowerById(id);
+        List<FlowerViewEntity> entities = new ArrayList<>();
+
+        if (optional.isPresent()) {
+            entities.add(optional.get());
+        } else {
+            throw new MyException("The id wasn't found");
+        }
+        return converter(entities);
+    }
+
+    private FlowerResponse converter(List<FlowerViewEntity> entities) {
+        FlowerResponse response = new FlowerResponse();
+        List<FlowerSingleResponse> responseList = new ArrayList<>();
+
+        for (FlowerViewEntity e : entities) {
+            FlowerSingleResponse singleResponse = new FlowerSingleResponse();
+            mapper.map(e, singleResponse);
+            responseList.add(singleResponse);
+        }
+
+        response.setFlowers(responseList);
+        return response;
     }
 }

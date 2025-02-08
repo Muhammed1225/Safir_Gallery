@@ -15,4 +15,8 @@ public interface FlowerInter {
 
     void delete(Integer id);
 
+    FlowerResponse findAll();
+
+    FlowerResponse findById(Integer id);
+
 }

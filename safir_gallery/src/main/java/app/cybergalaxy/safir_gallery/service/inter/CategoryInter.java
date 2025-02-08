@@ -14,4 +14,6 @@ public interface CategoryInter {
 
     void delete(Integer id);
 
+    CategoryResponse findById(Integer id);
+
 }

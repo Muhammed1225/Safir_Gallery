@@ -25,6 +25,11 @@ public class CategoryController {
         return service.findAll();
     }
 
+    @GetMapping("/{id}")
+    public CategoryResponse findById(@PathVariable Integer id) {
+        return service.findById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
