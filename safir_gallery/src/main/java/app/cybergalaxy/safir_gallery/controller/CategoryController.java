@@ -26,6 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public CategoryResponse findById(@PathVariable Integer id) {
         return service.findById(id);
     }
