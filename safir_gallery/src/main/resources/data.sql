@@ -6,7 +6,7 @@ values
 insert into users
 (username,password,enabled)
 values
-('codeAdam','{noop}Microsoft13'),
+('codeAdam','{noop}Microsoft13',1),
 ('admin1','{noop}1225',1);
 
 insert into authorities (username,authority) select 'admin1',role from authority_list where admin=true;
