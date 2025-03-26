@@ -6,6 +6,7 @@ values
 insert into users
 (username,password,enabled)
 values
+('codeAdam','{noop}Microsoft13'),
 ('admin1','{noop}1225',1);
 
 insert into authorities (username,authority) select 'admin1',role from authority_list where admin=true;
@@ -13,6 +14,7 @@ insert into authorities (username,authority) select 'admin1',role from authority
 insert into admins
 (name,username)
 values
+('Ibrahim','codeAdam'),
 ('Muhammed','admin1');
 
 insert into categories
