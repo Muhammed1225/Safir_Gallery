@@ -22,6 +22,8 @@ public class FlowerEntity {
 
     private List<String> images;
 
+    private Double price;
+
     private Integer categoryId;
 
 }

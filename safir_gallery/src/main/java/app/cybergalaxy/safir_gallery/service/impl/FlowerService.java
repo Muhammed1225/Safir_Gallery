@@ -38,7 +38,7 @@ public class FlowerService implements FlowerInter {
     private ModelMapper mapper;
 
     @Override
-    public void add(String text, Integer categoryId, List<MultipartFile> files) {
+    public void add(String text, Double price, Integer categoryId, List<MultipartFile> files) {
         FlowerEntity flower = new FlowerEntity();
 
         Optional<CategoryEntity> optional = categoryRepository.findById(categoryId);
@@ -51,6 +51,7 @@ public class FlowerService implements FlowerInter {
             }
 
             flower.setCategoryId(categoryId);
+            flower.setPrice(price);
             flower.setText(text);
             flower.setImages(paths);
             repository.save(flower);
@@ -76,7 +77,7 @@ public class FlowerService implements FlowerInter {
     }
 
     @Override
-    public void update(Integer id, String text, Integer categoryId, List<MultipartFile> files) {
+    public void update(Integer id, String text, Double price, Integer categoryId, List<MultipartFile> files) {
         Optional<FlowerEntity> optional = repository.findById(id);
 
         if (optional.isPresent()) {
@@ -93,6 +94,7 @@ public class FlowerService implements FlowerInter {
 
                 flower.setCategoryId(categoryId);
                 flower.setText(text);
+                flower.setPrice(price);
                 flower.setImages(paths);
                 repository.save(flower);
             } else {

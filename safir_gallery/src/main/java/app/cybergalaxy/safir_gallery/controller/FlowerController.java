@@ -42,13 +42,14 @@ public class FlowerController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> add(
             @RequestParam("text") String text,
+            @RequestParam("price") Double price,
             @RequestParam("categoryId") Integer categoryId,
             @RequestPart("files") List<MultipartFile> files
     ) {
         if (files.isEmpty()) {
             throw new MyException("File is required!");
         }
-        service.add(text, categoryId, files);
+        service.add(text, price, categoryId, files);
         return ResponseEntity.ok("The flower was added");
     }
 
@@ -58,13 +59,14 @@ public class FlowerController {
     public ResponseEntity<String> update(
             @RequestParam("id") Integer id,
             @RequestParam("text") String text,
+            @RequestParam("price") Double price,
             @RequestParam("categoryId") Integer categoryId,
             @RequestPart("files") List<MultipartFile> files
     ) {
         if (files.isEmpty()) {
             throw new MyException("File is required!");
         }
-        service.update(id, text, categoryId, files);
+        service.update(id, text, price, categoryId, files);
         return ResponseEntity.ok("The flower was updated");
     }
 

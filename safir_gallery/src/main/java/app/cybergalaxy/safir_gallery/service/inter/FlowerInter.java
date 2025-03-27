@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface FlowerInter {
 
-    void add(String text, Integer categoryId, List<MultipartFile> file);
+    void add(String text, Double price, Integer categoryId, List<MultipartFile> file);
 
     FlowerResponse findByCategory(Integer categoryId);
 
-    void update(Integer id, String text, Integer categoryId, List<MultipartFile> files);
+    void update(Integer id, String text, Double price, Integer categoryId, List<MultipartFile> files);
 
     void delete(Integer id);
 
