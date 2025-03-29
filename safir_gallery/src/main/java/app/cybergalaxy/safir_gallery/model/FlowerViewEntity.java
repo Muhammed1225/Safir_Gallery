@@ -20,6 +20,8 @@ public class FlowerViewEntity {
 
     private String text;
 
+    private Double price;
+
     private List<String> images;
 
     private String category;

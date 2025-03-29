@@ -44,15 +44,25 @@ public class BasketService implements BasketInter {
             Optional<FlowerEntity> optional = flowerRepository.findById(flowerId);
             if (optional.isPresent()) {
                 OrderEntity order = new OrderEntity();
+                FlowerEntity flower = optional.get();
                 order.setFlowerId(flowerId);
                 order.setBasketId(basketId);
                 orderRepository.save(order);
+
+                whatsAppService.sendWhatsAppMediaMessage(
+                        "Buketin adı: " + flower.getText() +
+                                "\nBuketin qiyməti: " + flower.getPrice(),
+                        "https://safirgallery-production.up.railway.app/uploads/" + flower.getImages().getFirst());
             } else {
                 throw new MyException("The flower not found!");
             }
         }
 
-        whatsAppService.sendWhatsAppMessage("Hello World", "https://www.google.com/imgres?q=safir%20wallpaper&imgurl=https%3A%2F%2Fpng.pngtree.com%2Fthumb_back%2Ffh260%2Fbackground%2F20240416%2Fpngtree-natural-sapphire-gemstone-jewel-or-gems-on-black-shine-color-image_15658802.jpg&imgrefurl=https%3A%2F%2Fid.pngtree.com%2Ffree-backgrounds-photos%2Fbatu-safir&docid=AQuzMYX5Ci087M&tbnid=z0W8x5SRktB0wM&vet=12ahUKEwjc563p5q6MAxWOVfEDHc1aH8YQM3oECDkQAA..i&w=720&h=404&hcb=2&ved=2ahUKEwjc563p5q6MAxWOVfEDHc1aH8YQM3oECDkQAA");
+        whatsAppService.sendWhatsAppMessage(
+                "Müştəri məlumatları: " +
+                "\nAd: " + request.getClient() +
+                "\nTelefon: " + request.getPhone() +
+                "\nÇatdırılma Tarixi: " + request.getDeliveryDate());
     }
 
 }

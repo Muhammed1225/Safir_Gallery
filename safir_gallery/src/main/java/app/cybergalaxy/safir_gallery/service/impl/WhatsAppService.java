@@ -13,14 +13,28 @@ import java.util.List;
 @Service
 public class WhatsAppService {
 
-    private String accountSid = System.getenv("ACCOUNT_SID");
+    private final String accountSid = System.getenv("ACCOUNT_SID");
 
-    private String authToken = System.getenv("AUTH_TOKEN");
+    private final String authToken = System.getenv("AUTH_TOKEN");
 
     @Value("${twilio.whatsapp.number}")
     private String twilioWhatsAppNumber;
 
-    public void sendWhatsAppMessage(String messageBody, String mediaUrl) {
+    public void sendWhatsAppMessage(String messageBody) {
+        try {
+            Twilio.init(accountSid, authToken);
+
+            Message message = Message.creator(
+                    new PhoneNumber("whatsapp:+994775087856"),
+                    new PhoneNumber(twilioWhatsAppNumber),
+                    messageBody
+            ).create();
+        } catch (Exception e) {
+            throw new MyException("Error sending media message: " + e.getMessage());
+        }
+    }
+
+    public void sendWhatsAppMediaMessage(String messageBody, String mediaUrl) {
         try {
             Twilio.init(accountSid, authToken);
 

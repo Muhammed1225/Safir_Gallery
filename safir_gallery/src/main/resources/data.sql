@@ -26,8 +26,8 @@ values
 ('Category3');
 
 insert into flowers
-(text, images, category_id)
+(text, price, images, category_id)
 values
-('flower1', 'p1', '2'),
-('flower2', 'p2', '1'),
-('flower3', 'p3', '3');
+('flower1', 21, 'p1', '2'),
+('flower2', 45, 'p2', '1'),
+('flower3', 34, 'p3', '3');
