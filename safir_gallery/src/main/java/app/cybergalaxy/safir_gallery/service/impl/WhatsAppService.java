@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class WhatsAppService {
 
-    private String accountSid = "lhsdlj";
+    private String accountSid = System.getenv("ACCOUNT_SID");
 
-    private String authToken = "lkjadkas;l";
+    private String authToken = System.getenv("AUTH_TOKEN");
 
     @Value("${twilio.whatsapp.number}")
     private String twilioWhatsAppNumber;
