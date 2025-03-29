@@ -18,7 +18,7 @@ public class BasketAddRequest {
     @NotNull
     private String phone;
 
-    private List<String> flowers;
+    private List<Integer> flowers;
 
     @NotNull
     @JsonDeserialize(using = LocalDateDeserializer.class)

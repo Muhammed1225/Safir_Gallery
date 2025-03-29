@@ -1,8 +1,7 @@
 package app.cybergalaxy.safir_gallery.service.inter;
 
-import java.time.LocalDate;
-import java.util.List;
+import app.cybergalaxy.safir_gallery.dto.request.BasketAddRequest;
 
 public interface BasketInter {
-    void addOrder(String client, String phone, List<Integer> flowers, LocalDate deliveryDate);
+    void addOrder(BasketAddRequest request);
 }
