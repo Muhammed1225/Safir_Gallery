@@ -52,7 +52,7 @@ public class BasketService implements BasketInter {
                 whatsAppService.sendWhatsAppMediaMessage(
                         "Buketin adı: " + flower.getText() +
                                 "\nBuketin qiyməti: " + flower.getPrice(),
-                        "https://safirgallery-production.up.railway.app/uploads/" + flower.getImages().getFirst());
+                        "https://safirgallery-production.up.railway.app/uploads/" + flower.getImages().get(0));
             } else {
                 throw new MyException("The flower not found!");
             }
